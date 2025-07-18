@@ -7,7 +7,7 @@ st.title("AutoAdvisor - A/B Test Strategy Assistant")
 
 st.write("Upload your A/B test CSV and get product insights powered by GPT.")
 
-uploaded_file = st.file_uploadder("Upload your A/B test CSV file", type="csv")
+uploaded_file = st.file_uploader("Upload your A/B test CSV file", type="csv")
 
 if uploaded_file:
     try:
