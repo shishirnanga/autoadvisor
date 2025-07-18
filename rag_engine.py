@@ -1,7 +1,7 @@
 import openai
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_recommendation(summary):
     prompt = f"""
@@ -13,7 +13,7 @@ def generate_recommendation(summary):
     Give clear, actionable advice in 3-5 bullet points.
     """
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a senior product strategist."},
@@ -23,4 +23,4 @@ def generate_recommendation(summary):
         max_tokens=300
     )
 
-    return response.choices[0].message['content'].strip()
+    return response.choices[0].message.content.strip()
