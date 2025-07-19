@@ -24,5 +24,6 @@ def analyze_ab_test(file):
                 _, p, _, _ = chi2_contingency(contingency)
                 summary += f"   (p-value: {p:.4f}) {'🔹 Significant' if p < 0.05 else '🔸 Not significant'}\n"
 
-    return summary.strip(), chart_data
+    return summary_text, chart_data, {"p_value": p_value, "low_data_warning": low_data_flag}
+
 
