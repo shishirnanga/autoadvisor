@@ -36,10 +36,8 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown("### AutoAdvisor")
-st.markdown("<div class='subtitle'>Your AI-powered product strategy assistant</div>", unsafe_allow_html=True)
 st.markdown("---")
-st.image("logo.png", width=80)  
+
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
