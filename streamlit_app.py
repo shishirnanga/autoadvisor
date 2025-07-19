@@ -3,6 +3,7 @@ from parse_csv import analyze_ab_test
 from rag_engine import generate_recommendation
 from parse_feedback import parse_feedback
 from feedback_engine import generate_feedback_insights
+from plot_utils import render_bar_chart
 
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.title("AutoAdvisor – Your Product Strategy Copilot")
@@ -10,18 +11,29 @@ st.title("AutoAdvisor – Your Product Strategy Copilot")
 tab1, tab2, tab3 = st.tabs(["A/B Test", "Feedback", "Dashboard PDF"])
 
 
+from parse_csv import analyze_ab_test
+from plot_utils import render_bar_chart
+
+...
+
 with tab1:
     st.subheader("Upload your A/B test CSV file")
     uploaded_file = st.file_uploader("CSV for A/B test", type="csv", key="ab_test")
 
     if uploaded_file:
         try:
-            summary = analyze_ab_test(uploaded_file)
+            summary, chart_data = analyze_ab_test(uploaded_file)
             st.subheader("Experiment Summary")
             st.code(summary)
 
+            metric = st.selectbox("Select metric to visualize", list(chart_data.keys()))
+            fig = render_bar_chart(chart_data, metric)
+            if fig:
+                st.pyplot(fig)
+
             if st.button("Generate Recommendations", key="ab_button"):
                 with st.spinner("Thinking..."):
+                    from rag_engine import generate_recommendation
                     insights = generate_recommendation(summary)
                     st.subheader("Product Recommendation")
                     st.write(insights)
