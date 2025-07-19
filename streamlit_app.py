@@ -70,12 +70,10 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-    <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-        <img src="logo.png" width="80">
-    </div>
-""", unsafe_allow_html=True)
-
+col1, col2, col3 = st.columns([1, 1, 1])
+with col2:
+    st.image("logo.png", width=80)
+    st.markdown("<div style='margin-bottom: 1rem;'></div>", unsafe_allow_html=True)
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
 
