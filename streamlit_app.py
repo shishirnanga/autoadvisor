@@ -70,7 +70,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.image("logo.png", width=180)
+st.image("logo.png", width=100)
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
