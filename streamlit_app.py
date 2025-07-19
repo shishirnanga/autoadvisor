@@ -9,7 +9,7 @@ st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
         .main {
-            background-color: #fafafa;
+            background-color: #FFE4C4;
         }
         h1 {
             font-size: 2.5rem;
