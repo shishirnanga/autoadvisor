@@ -35,16 +35,46 @@ st.markdown("""
             font-weight: 500;
             color: #444;
         }
+            [data-baseweb="tab-list"] {
+        margin-bottom: 1rem;
+    }
+    /* Inactive tab style */
+    [data-baseweb="tab"] {
+        background-color: #1c1c1c;
+        color: #ccc;
+        border-radius: 6px 6px 0 0;
+        padding: 0.75rem 1.2rem;
+        margin-right: 0.5rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    /* Hover effect */
+    [data-baseweb="tab"]:hover {
+        background-color: #333333;
+        color: #fff;
+    }
+
+    /* Active tab style */
+    [data-baseweb="tab"][aria-selected="true"] {
+        background-color: #4a90e2;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 -3px 10px rgba(74, 144, 226, 0.4);
+    }
     </style>
 
     <div class="header-container">
-        <img src="logo.png" width="70" style="margin-bottom: 10px;" />
         <h1>AutoAdvisor</h1>
         <div class="subtitle">Your AI-powered product strategy assistant</div>
     </div>
 """, unsafe_allow_html=True)
 
-st.image("logo.png", width=80) 
+st.markdown("""
+    <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+        <img src="logo.png" width="80">
+    </div>
+""", unsafe_allow_html=True)
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
