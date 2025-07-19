@@ -7,7 +7,8 @@ from feedback_engine import generate_feedback_insights
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.title("AutoAdvisor – Your Product Strategy Copilot")
 
-tab1, tab2 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer"])
+tab1, tab2, tab3 = st.tabs(["A/B Test", "Feedback", "Dashboard PDF"])
+
 
 with tab1:
     st.subheader("Upload your A/B test CSV file")
@@ -41,3 +42,21 @@ with tab2:
                     st.write(result)
         except Exception as e:
             st.error(f"Error processing feedback file: {e}")
+
+with tab3:
+    st.subheader("Upload a Dashboard PDF")
+    pdf_file = st.file_uploader("PDF report / dashboard", type="pdf")
+
+    if pdf_file:
+        if st.button("Analyse PDF"):
+            with st.spinner("Extracting & analysing..."):
+                from parse_pdf import extract_text_from_pdf
+                from pdf_engine import analyse_dashboard
+
+                pdf_text = extract_text_from_pdf(pdf_file)
+                if not pdf_text:
+                    st.error("No extractable text found in that PDF.")
+                else:
+                    summary = analyse_dashboard(pdf_text)
+                    st.subheader("Dashboard Insights")
+                    st.write(summary)
