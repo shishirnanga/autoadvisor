@@ -14,7 +14,7 @@ st.markdown("""
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .header-container h1 {
@@ -27,6 +27,14 @@ st.markdown("""
             font-size: 1.2rem;
             color: #555;
         }
+        .header-container:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        .stTabs [data-baseweb="tab"] {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #444;
+        }
     </style>
 
     <div class="header-container">
@@ -36,8 +44,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown("---")
-
+st.image("logo.png", width=80) 
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
