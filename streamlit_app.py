@@ -8,30 +8,41 @@ from plot_utils import render_bar_chart
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
-        .main {
-            background-color: #FFE4C4;
+        .header-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        h1 {
+
+        .header-container h1 {
             font-size: 2.5rem;
             color: #222;
+            margin-bottom: 0.2rem;
         }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-        }
-        .stApp {
-            padding: 2rem;
+
+        .header-container .subtitle {
+            font-size: 1.2rem;
+            color: #555;
         }
     </style>
+
+    <div class="header-container">
+        <img src="logo.png" width="70" style="margin-bottom: 10px;" />
+        <h1>AutoAdvisor</h1>
+        <div class="subtitle">Your AI-powered product strategy assistant</div>
+    </div>
 """, unsafe_allow_html=True)
 
-st.markdown("### 🤖 AutoAdvisor")
+st.markdown("### AutoAdvisor")
 st.markdown("<div class='subtitle'>Your AI-powered product strategy assistant</div>", unsafe_allow_html=True)
 st.markdown("---")
 st.image("logo.png", width=80)  
 
 
-tab1, tab2, tab3 = st.tabs(["📊 A/B Test Analyzer", "💬 Feedback Analyzer", "📄 Dashboard PDF"])
+tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
 
 
 
@@ -41,7 +52,7 @@ from plot_utils import render_bar_chart
 ...
 
 with tab1:
-    st.subheader("📊 Upload your A/B test CSV file")
+    st.subheader("Upload your A/B test CSV file")
     st.markdown("Upload a CSV with columns like `user_id`, `group`, and metrics such as `conversion_rate` or `avg_time_on_site`.")
     uploaded_file = st.file_uploader("Upload A/B Test CSV", type="csv", key="ab_test")
     st.markdown("")
@@ -53,34 +64,34 @@ with tab1:
             if stats.get("low_data_warning"):
                 st.warning("⚠️ Not enough data to run a reliable statistical test.")
             else:
-                st.markdown("### 🧾 Summary Stats")
+                st.markdown("### Summary Stats")
                 st.code(summary)
 
                 p = stats.get("p_value")
                 if p is not None:
                     if p < 0.05:
-                        st.success(f"🚨 The result is statistically significant (p = {p:.4f})")
+                        st.success(f"The result is statistically significant (p = {p:.4f})")
                     else:
-                        st.info(f"ℹ️ The result is NOT statistically significant (p = {p:.4f})")
+                        st.info(f"The result is NOT statistically significant (p = {p:.4f})")
 
-                metric = st.selectbox("📈 Select a metric to visualize", list(chart_data.keys()))
+                metric = st.selectbox("Select a metric to visualize", list(chart_data.keys()))
                 fig = render_bar_chart(chart_data, metric)
                 if fig:
                     st.pyplot(fig)
 
                 st.markdown("")
-                if st.button("💡 Generate Strategy Recommendation", key="ab_button"):
+                if st.button("Generate Strategy Recommendation", key="ab_button"):
                     with st.spinner("GPT is thinking..."):
                         from rag_engine import generate_recommendation
                         insights = generate_recommendation(summary)
-                        st.markdown("### 🧠 GPT Insights")
+                        st.markdown("### GPT Insights")
                         st.success(insights)
         except Exception as e:
             st.error(f"Error: {e}")
 
 
 with tab2:
-    st.subheader("💬 Upload customer feedback CSV")
+    st.subheader("Upload customer feedback CSV")
     st.markdown("Upload a CSV with a `feedback` column. We'll extract key themes using GPT.")
 
     feedback_file = st.file_uploader("Upload Feedback CSV", type="csv", key="feedback")
@@ -89,20 +100,20 @@ with tab2:
     if feedback_file:
         try:
             feedback_text = parse_feedback(feedback_file)
-            st.markdown("### 📚 Raw Extracted Feedback")
+            st.markdown("### Raw Extracted Feedback")
             st.code(feedback_text[:1000] + "\n..." if len(feedback_text) > 1000 else feedback_text)
 
-            if st.button("💡 Summarize Feedback Insights", key="fb_button"):
+            if st.button("Summarize Feedback Insights", key="fb_button"):
                 with st.spinner("GPT is reading feedback..."):
                     fb_insights = generate_feedback_insights(feedback_text)
-                    st.markdown("### 🧠 GPT Insights")
+                    st.markdown("### GPT Insights")
                     st.success(fb_insights)
         except Exception as e:
             st.error(f"Error processing feedback file: {e}")
 
 
 with tab3:
-    st.subheader("📄 Upload dashboard screenshot (PDF or image)")
+    st.subheader("Upload dashboard screenshot (PDF or image)")
     st.markdown("We'll use OCR to extract text and generate strategy suggestions.")
 
     pdf_file = st.file_uploader("Upload PDF/Image", type=["pdf", "png", "jpg", "jpeg"], key="pdf")
@@ -112,13 +123,13 @@ with tab3:
         try:
             from ingest.parse_pdf import extract_text_from_pdf
             extracted_text = extract_text_from_pdf(pdf_file)
-            st.markdown("### 📃 Extracted Text")
+            st.markdown("### Extracted Text")
             st.code(extracted_text[:1000] + "\n..." if len(extracted_text) > 1000 else extracted_text)
 
-            if st.button("💡 Analyze Dashboard Text", key="pdf_button"):
+            if st.button("Analyze Dashboard Text", key="pdf_button"):
                 with st.spinner("GPT is analyzing dashboard..."):
                     insights = generate_recommendation(extracted_text)
-                    st.markdown("### 🧠 GPT Insights")
+                    st.markdown("### GPT Insights")
                     st.success(insights)
         except Exception as e:
             st.error(f"Error processing file: {e}")
