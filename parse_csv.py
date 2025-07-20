@@ -9,6 +9,8 @@ def analyze_ab_test(file):
 
     summary = ""
     chart_data = {}
+    p = None 
+    low_data_flag = False
 
     for metric in metrics:
         group_stats = df.groupby('group')[metric].mean()
@@ -23,7 +25,9 @@ def analyze_ab_test(file):
             if contingency.shape == (2, 2):
                 _, p, _, _ = chi2_contingency(contingency)
                 summary += f"   (p-value: {p:.4f}) {'🔹 Significant' if p < 0.05 else '🔸 Not significant'}\n"
+            else:
+                summary += f"   ⚠️ Not enough data for statistical test (non-2x2 table)\n"
+                low_data_flag = True
 
-    return summary_text, chart_data, {"p_value": p_value, "low_data_warning": low_data_flag}
-
+    return summary, chart_data, {"p_value": p, "low_data_warning": low_data_flag}
 
