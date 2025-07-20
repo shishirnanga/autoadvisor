@@ -8,31 +8,29 @@ from plot_utils import render_bar_chart
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
-        .header-container {
+        body {
             background-image: url("header_bg.png");
             background-size: cover;
-            background-position: center;
-            background-blend-mode: lighten;
-            background-color: #f8f9fa;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background-attachment: fixed;
+        }
+        .header-container {
+            background: linear-gradient(to right, #f2f7fc, #e0eafc);
+            padding: 2rem;
+            border-radius: 15px;
             text-align: center;
-            margin-bottom: 2rem;
-            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
         }
 
         .header-container h1 {
-            font-size: 2.7rem;
-            background: linear-gradient(to right, #4a90e2, #a1c4fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.4rem;
+            font-size: 2.8rem;
+            color: #3366cc;
+            margin-bottom: 0.5rem;
         }
 
         .header-container .subtitle {
             font-size: 1.25rem;
-            color: #555;
+            color: #666;
         }
         .header-container:hover {
             box-shadow: 0 6px 16px rgba(0,0,0,0.08);
@@ -47,8 +45,8 @@ st.markdown("""
         }
         /* Inactive tab style */
         [data-baseweb="tab"] {
-            background-color: #1c1c1c;
-            color: #ccc;
+            background-color: #F0FFFF;
+            color: #0000FF;
             border-radius: 6px 6px 0 0;
             padding: 0.75rem 1.2rem;
             margin-right: 0.5rem;
@@ -69,17 +67,27 @@ st.markdown("""
             font-weight: 600;
             box-shadow: 0 -3px 10px rgba(74, 144, 226, 0.4);
         }
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+        .logo img {
+            width: 80px;
+            height: auto;
+        }
     </style>
 
     <div class="header-container">
         <h1>AutoAdvisor</h1>
         <div class="subtitle">Your AI-powered product strategy assistant</div>
     </div>
+    <div class="logo">
+        <img src="logo.png" alt="logo">
+    </div>
 """, unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 1, 1])
-with col2:
-    st.image("logo.png", width=100)
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
