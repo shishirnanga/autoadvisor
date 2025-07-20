@@ -9,7 +9,7 @@ st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
         body {
-            background-image: url("header_bg.png");
+            background-image: url("header_bg.jpg");
             background-size: cover;
             background-attachment: fixed;
         }
@@ -84,7 +84,7 @@ st.markdown("""
         <div class="subtitle">Your AI-powered product strategy assistant</div>
     </div>
     <div class="logo">
-        <img src="logo.png" alt="logo">
+        <img src="logo.jpg" alt="logo">
     </div>
 """, unsafe_allow_html=True)
 
