@@ -8,29 +8,31 @@ from plot_utils import render_bar_chart
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
-        body {
-            background-image: url("header_bg.jpg");
-            background-size: cover;
-            background-attachment: fixed;
-        }
         .header-container {
-            background: linear-gradient(to right, #f2f7fc, #e0eafc);
-            padding: 2rem;
+            background: linear-gradient(to right, #dbeafe, #e0f2fe);
+            padding: 2.5rem;
             border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .header-container h1 {
-            font-size: 2.8rem;
-            color: #3366cc;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: #1e3a8a;
+            margin-bottom: 0.4rem;
+            font-weight: 800;
         }
 
         .header-container .subtitle {
-            font-size: 1.25rem;
-            color: #666;
+            font-size: 1.1rem;
+            color: #334155;
+        }
+
+        .header-container img {
+            margin-top: 1rem;
+            width: 85px;
+            border-radius: 10px;
         }
         .header-container:hover {
             box-shadow: 0 6px 16px rgba(0,0,0,0.08);
@@ -83,8 +85,8 @@ st.markdown("""
         <h1>AutoAdvisor</h1>
         <div class="subtitle">Your AI-powered product strategy assistant</div>
     </div>
-    <div class="logo">
-        <img src="logo.jpg" alt="logo">
+    <div style='text-align: center; margin-top: -20px; margin-bottom: 10px;'>
+        <img src='logo.png' width='90'/>
     </div>
 """, unsafe_allow_html=True)
 
