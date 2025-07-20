@@ -8,76 +8,65 @@ from plot_utils import render_bar_chart
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
+        /* Page background */
+        body {
+            background-color: transparent;
+        }
+
+        /* Header styling with gradient */
         .header-container {
-            background: linear-gradient(to right, #dbeafe, #e0f2fe);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(to right, #e0f7fa, #e3f2fd);
+            padding: 2rem;
+            border-radius: 20px;
             text-align: center;
-            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            transition: all 0.5s ease-in-out;
         }
 
         .header-container h1 {
-            font-size: 2.5rem;
-            color: #1e3a8a;
-            margin-bottom: 0.4rem;
-            font-weight: 800;
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin: 0;
+            color: #1e88e5;
         }
 
         .header-container .subtitle {
-            font-size: 1.1rem;
-            color: #334155;
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 0.5rem;
         }
 
-        .header-container img {
-            margin-top: 1rem;
-            width: 85px;
-            border-radius: 10px;
-        }
-        .header-container:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
+        /* Tabs styling */
         .stTabs [data-baseweb="tab"] {
-            font-size: 1.05rem;
-            font-weight: 500;
+            font-size: 1.1rem;
             color: #444;
-        }
-        [data-baseweb="tab-list"] {
-            margin-bottom: 1rem;
-        }
-        /* Inactive tab style */
-        [data-baseweb="tab"] {
-            background-color: #F0FFFF;
-            color: #0000FF;
-            border-radius: 6px 6px 0 0;
-            padding: 0.75rem 1.2rem;
-            margin-right: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background-color: transparent;
+            border-radius: 10px 10px 0 0;
             transition: all 0.3s ease;
-            font-weight: 500;
         }
 
-        /* Hover effect */
-        [data-baseweb="tab"]:hover {
-            background-color: #333333;
-            color: #fff;
-        }
-
-        /* Active tab style */
-        [data-baseweb="tab"][aria-selected="true"] {
-            background-color: #4a90e2;
-            color: white;
+        .stTabs [aria-selected="true"] {
+            background: #cfe9ff;
+            color: #1e88e5;
             font-weight: 600;
-            box-shadow: 0 -3px 10px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
         }
-        .logo {
-            display: flex;
-            justify-content: center;
-            margin-top: -1rem;
-            margin-bottom: 1rem;
+
+        .stTabs [data-baseweb="tab"]:hover {
+            background-color: #e3f2fd;
+            color: #1e88e5;
         }
-        .logo img {
-            width: 80px;
-            height: auto;
+
+        /* Add fade-in effect to content */
+        .block-container {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 
@@ -85,21 +74,13 @@ st.markdown("""
         <h1>AutoAdvisor</h1>
         <div class="subtitle">Your AI-powered product strategy assistant</div>
     </div>
-    <div style='text-align: center; margin-top: -20px; margin-bottom: 10px;'>
-        <img src='logo.png' width='90'/>
-    </div>
 """, unsafe_allow_html=True)
 
-
-
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
-
-
 
 from parse_csv import analyze_ab_test
 from plot_utils import render_bar_chart
 
-...
 
 with tab1:
     st.subheader("Upload your A/B test CSV file")
