@@ -9,22 +9,29 @@ st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
     <style>
         .header-container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-image: url("header_bg.png");
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: lighten;
+            background-color: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid #ddd;
         }
 
         .header-container h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 0.2rem;
+            font-size: 2.7rem;
+            background: linear-gradient(to right, #4a90e2, #a1c4fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.4rem;
         }
 
         .header-container .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: #555;
         }
         .header-container:hover {
@@ -35,33 +42,33 @@ st.markdown("""
             font-weight: 500;
             color: #444;
         }
-            [data-baseweb="tab-list"] {
-        margin-bottom: 1rem;
-    }
-    /* Inactive tab style */
-    [data-baseweb="tab"] {
-        background-color: #1c1c1c;
-        color: #ccc;
-        border-radius: 6px 6px 0 0;
-        padding: 0.75rem 1.2rem;
-        margin-right: 0.5rem;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
+        [data-baseweb="tab-list"] {
+            margin-bottom: 1rem;
+        }
+        /* Inactive tab style */
+        [data-baseweb="tab"] {
+            background-color: #1c1c1c;
+            color: #ccc;
+            border-radius: 6px 6px 0 0;
+            padding: 0.75rem 1.2rem;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
 
-    /* Hover effect */
-    [data-baseweb="tab"]:hover {
-        background-color: #333333;
-        color: #fff;
-    }
+        /* Hover effect */
+        [data-baseweb="tab"]:hover {
+            background-color: #333333;
+            color: #fff;
+        }
 
-    /* Active tab style */
-    [data-baseweb="tab"][aria-selected="true"] {
-        background-color: #4a90e2;
-        color: white;
-        font-weight: 600;
-        box-shadow: 0 -3px 10px rgba(74, 144, 226, 0.4);
-    }
+        /* Active tab style */
+        [data-baseweb="tab"][aria-selected="true"] {
+            background-color: #4a90e2;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 -3px 10px rgba(74, 144, 226, 0.4);
+        }
     </style>
 
     <div class="header-container">
@@ -70,7 +77,9 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.image("logo.png", width=100)
+col1, col2, col3 = st.columns([1, 1, 1])
+with col2:
+    st.image("logo.png", width=100)
 
 
 tab1, tab2, tab3 = st.tabs(["A/B Test Analyzer", "Feedback Analyzer", "Dashboard PDF"])
