@@ -5,6 +5,7 @@ from parse_feedback import parse_feedback
 from feedback_engine import generate_feedback_insights
 from plot_utils import render_bar_chart
 import streamlit.components.v1 as components
+from ingest.parse_pdf import extract_text_from_pdf
 
 st.set_page_config(page_title="AutoAdvisor", layout="wide")
 st.markdown("""
